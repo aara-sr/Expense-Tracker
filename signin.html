@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Style/styles_signin.css">
+</head>
+
+<body>
+    <section class="signin-section">
+        <h1>Welcome Back!</h1>
+        <form id="signinForm" class="signin-form">
+            <label for="email">Email</label>
+            <input id="email" name="email" placeholder="Enter your email" required type="email" />
+
+            <label for="password">Password</label>
+            <div style="position: relative;">
+                <input id="password" name="password" placeholder="Enter your password" required type="password" />
+                <button id="toggle-password" type="button"
+                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-100%) translateX(100%); background: none; border: none; cursor: pointer;">
+                    👁️
+                </button>
+            </div>
+
+
+            <a class="forgot-password" href="#">Forgot Password?</a>
+
+            <input class="btn signin-btn" type="submit" value="Sign In" />
+        </form>
+        <p><a href="./index.html">Back</a></p>
+        <p>Don't have an account? <a href="./signup.html">Sign Up</a></p>
+    </section>
+
+    <script>
+        document.getElementById("signinForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Retrieve users from localStorage
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // Check if user exists and password matches
+            const user = users.find(user => user.email === email);
+            if (user) {
+                if (user.password === password) {
+                    alert("Sign-in successful!");
+                    console.log("Signed-in User:", user);
+
+                    // Set user as logged in
+                    localStorage.setItem("loggedInUser", JSON.stringify(user));
+
+                    // Redirect to indexExpense.html
+                    window.location.href = "./indexExpense.html";
+                } else {
+                    alert("Incorrect password! Please try again.");
+                }
+            } else {
+                alert("No account found with this email. Please sign up.");
+            }
+        });
+
+        const togglePassword = document.getElementById("toggle-password");
+        const passwordField = document.getElementById("password");
+
+        togglePassword.addEventListener("click", () => {
+            const isPassword = passwordField.type === "password";
+            passwordField.type = isPassword ? "text" : "password";
+            togglePassword.textContent = isPassword ? "🙈" : "👁️"; // Toggle icon
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Style/styles_signup.css">
+</head>
+
+<body>
+    <section class="signup-section">
+        <h1>Create an Account</h1>
+        <form action="" class="signup-form" id="signupForm">
+            <label for="name">Full Name</label>
+            <input id="name" name="name" placeholder="Enter your full name" required type="text" />
+
+            <label for="email">Email</label>
+            <input id="email" name="email" placeholder="Enter your email" required type="email" />
+
+            <label for="password">Password</label>
+            <div style="position: relative;">
+                <input id="password" name="password" placeholder="Enter your password" required type="password" />
+                <button id="toggle-password" type="button"
+                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-100%) translateX(100%); background: none; border: none; cursor: pointer;">
+                    👁️
+                </button>
+            </div>
+
+            <label for="confirm-password">Confirm Password</label>
+            <div style="position: relative;">
+                <input id="confirm-password" name="confirm-password" placeholder="Confirm your password" required
+                    type="password" />
+                <button id="toggle-confirm-password" type="button"
+                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-100%) translateX(100%); background: none; border: none; cursor: pointer;">
+                    👁️
+                </button>
+            </div>
+
+            <input class="btn signup-btn" type="submit" value="Sign Up" />
+        </form>
+        <p><a href="./index.html">Back</a></p>
+        <p>Already have an account? <a href="./signin.html">Sign In</a></p>
+    </section>
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form submission and page reload
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+
+            // Function to validate password
+            function isValidPassword(password) {
+                const minLength = 8;
+                const hasLowercase = /[a-z]/.test(password);
+                const hasUppercase = /[A-Z]/.test(password);
+                const hasNumber = /\d/.test(password);
+                const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+                return (
+                    password.length >= minLength &&
+                    hasLowercase &&
+                    hasUppercase &&
+                    hasNumber &&
+                    hasSpecialChar
+                );
+            }
+
+            // Validate password
+            if (!isValidPassword(password)) {
+                alert("Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, one number, and one special character.");
+                return;
+            }
+
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            // Retrieve existing users from localStorage
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // Check for duplicate email
+            const existingUser = users.find(user => user.email === email);
+            if (existingUser) {
+                alert("This email is already registered!");
+                return;
+            }
+
+            // Add new user to the users array
+            const newUser = { name, email, password };
+            users.push(newUser);
+
+            // Save updated users array to localStorage
+            localStorage.setItem("users", JSON.stringify(users));
+
+            // Log users in the console
+            console.log("User Registered:", newUser);
+            console.log("All Users:", users);
+
+            // Notify user and reset form
+            alert("Sign-up successful!");
+            document.getElementById("signupForm").reset();
+            window.location.href = "./signin.html";
+        });
+
+        // Toggle Password Visibility
+        const togglePassword = document.getElementById("toggle-password");
+        const passwordField = document.getElementById("password");
+
+        togglePassword.addEventListener("click", () => {
+            const isPassword = passwordField.type === "password";
+            passwordField.type = isPassword ? "text" : "password";
+            togglePassword.textContent = isPassword ? "🙈" : "👁️";
+        });
+
+        // Toggle Confirm Password Visibility
+        const toggleConfirmPassword = document.getElementById("toggle-confirm-password");
+        const confirmPasswordField = document.getElementById("confirm-password");
+
+        toggleConfirmPassword.addEventListener("click", () => {
+            const isPassword = confirmPasswordField.type === "password";
+            confirmPasswordField.type = isPassword ? "text" : "password";
+            toggleConfirmPassword.textContent = isPassword ? "🙈" : "👁️";
+        });
+    </script>
+
+</body>
+
+</html>
