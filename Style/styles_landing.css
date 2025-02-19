@@ -17,9 +17,11 @@ body {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
@@ -306,24 +308,26 @@ footer p {
     header nav {
         display: none;
     }
-    
-    .importance-grid, .features-grid {
+
+    .importance-grid,
+    .features-grid {
         flex-direction: column;
     }
-    
-    .importance-item, .feature-item {
+
+    .importance-item,
+    .feature-item {
         width: 100%;
         margin-bottom: 2rem;
     }
-    
+
     .cta h2 {
         font-size: 1.5rem;
     }
-    
+
     .testimonial-item {
         width: 90%;
     }
-    
+
     footer .footer-content {
         flex-direction: column;
     }
@@ -331,4 +335,19 @@ footer p {
 
 .animate__backInLeft {
     animation: 3s ease;
+}
+
+.navbar {
+    margin: 0 auto;
+    margin-left: 10vw;
+    background-color: #333;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-toggler {
+    border-color: #ff9800;
 }

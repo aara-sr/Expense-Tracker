@@ -45,7 +45,9 @@ body {
 
 .signup-form input[type="text"],
 .signup-form input[type="email"],
-.signup-form input[type="password"] {
+.signup-form input[type="password"],
+.signup-form input[type="tel"],
+.signup-form input[type="number"] {
     width: 100%;
     padding: 0.8rem;
     border: 1px solid #ccc;
@@ -93,4 +95,24 @@ body {
     .signup-section h1 {
         font-size: 2rem;
     }
+}
+
+/* Styling for the checkbox and radio buttons */
+.signup-form input[type="checkbox"],
+.signup-form input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+.signup-form label {
+    margin-bottom: 1rem;
+}
+
+.signup-form a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-form a:hover {
+    text-decoration: underline;
 }

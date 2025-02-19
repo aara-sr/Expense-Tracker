@@ -37,8 +37,34 @@
                 </button>
             </div>
 
+            <!-- New Mobile Number Field -->
+            <label for="mobile">Mobile Number</label>
+            <div style="position: relative;">
+                <input id="mobile" name="mobile" placeholder="Enter your mobile number" required type="tel" />
+            </div>
+            <!-- New Age Field -->
+            <label for="age">Age</label>
+            <div style="position: relative;">
+                <input id="age" name="age" placeholder="Enter your age" required type="number" min="1" />
+            </div>
+            <!-- Gender Radio Buttons -->
+            <label>Gender</label>
+            <div>
+                <label for="male"><input id="male" name="gender" value="male" type="radio" required /> Male</label>
+                <label for="female"><input id="female" name="gender" value="female" type="radio" required />
+                    Female</label>
+                <label for="other"><input id="other" name="gender" value="other" type="radio" required /> Other</label>
+            </div>
+
+            <!-- Terms and Conditions Checkbox -->
+            <label for="terms">
+                <input id="terms" name="terms" type="checkbox" required />
+                I agree with the <a href="./terms.html" target="_blank">terms and conditions</a>.
+            </label>
+
             <input class="btn signup-btn" type="submit" value="Sign Up" />
         </form>
+
         <p><a href="./index.html">Back</a></p>
         <p>Already have an account? <a href="./signin.html">Sign In</a></p>
     </section>
@@ -50,6 +76,10 @@
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
             const confirmPassword = document.getElementById("confirm-password").value;
+            const mobile = document.getElementById("mobile").value;
+            const age = document.getElementById("age").value;
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const termsChecked = document.getElementById("terms").checked;
 
             // Function to validate password
             function isValidPassword(password) {
@@ -66,6 +96,11 @@
                     hasNumber &&
                     hasSpecialChar
                 );
+            }
+
+            if (!termsChecked) {
+                alert("You must agree to the terms and conditions to sign up.");
+                return;
             }
 
             // Validate password
@@ -91,7 +126,7 @@
             }
 
             // Add new user to the users array
-            const newUser = { name, email, password };
+            const newUser = { name, email, password, mobile, age, gender };
             users.push(newUser);
 
             // Save updated users array to localStorage

@@ -9,6 +9,12 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible" />
     <title>About Us</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background: linear-gradient(45deg, #aff03f, #e859aa, rgb(66, 66, 250));
             background-size: 400% 400%;
@@ -24,14 +30,67 @@
             width: 80%;
             margin: 0 auto;
             max-width: 1200px;
-            padding: 50px 0;
+            padding: 15px 0;
         }
 
-        h1 {
-            text-align: center;
-            font-size: 3rem;
-            color: #333;
-            margin-bottom: 30px;
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 0;
+        }
+
+        header nav {
+            float: left;
+            margin-left: 2rem;
+            margin-top: 10px;
+        }
+
+        header nav ul {
+            list-style: none;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 1rem;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header .auth-buttons {
+            float: right;
+        }
+
+        header .auth-buttons .btn {
+            background-color: #ff9800;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-left: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        header .auth-buttons .btn:hover {
+            background-color: #e68a00;
+        }
+
+        header:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .btn {
+            background-color: #fff;
+            color: #ff9800;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
 
         .team-section {
@@ -99,12 +158,41 @@
                 background-position: 0% 50%;
             }
         }
+
+        .navbar {
+            margin: 0 auto;
+            margin-left: 35vw;
+            background-color: #333;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .navbar-toggler {
+            border-color: #ff9800;
+        }
     </style>
 </head>
 
 <body>
+    <header style="background-color: #333; color: #fff; padding: 10px;">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h2 style="margin: 0;">About Us</h2>
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <a href="index.html" style="color: #fff; margin-right: 15px; text-decoration: none;">Home</a>
+                <a href="#team" style="color: #fff; margin-right: 15px; text-decoration: none;">Meet the Team</a>
+                <a href="contact.html" style="color: #fff; margin-right: 15px; text-decoration: none;">Contact Us</a>
+            </nav>
+            <div class="auth-buttons">
+                <a class="btn sign-in" href="./signin.html">Sign In</a>
+                <a class="btn sign-up" href="./signup.html">Sign Up</a>
+                <button class="btn logout" style="display: none;">Log Out</button>
+            </div>
+        </div>
+    </header>
     <div class="container">
-        <h1>Meet the Team</h1>
         <div class="team-section">
             <div class="team-member">
                 <img alt="Person 1" height="150px"
@@ -134,6 +222,33 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Example user authentication check (adjust as needed)
+        const userIsLoggedIn = false; // Replace with your actual login status check
+
+        function updateAuthButtons() {
+            const authButtons = document.getElementById("auth-buttons");
+            if (userIsLoggedIn) {
+                authButtons.innerHTML = '<button class="btn btn-danger btn-sm" onclick="handleAuth(\'logout\')">Log Out</button>';
+            }
+        }
+
+        function handleAuth(action) {
+            if (action === 'login') {
+                alert("Redirecting to login...");
+                // Replace with actual login redirection
+            } else if (action === 'signup') {
+                alert("Redirecting to sign up...");
+                // Replace with actual signup redirection
+            } else if (action === 'logout') {
+                alert("Logging out...");
+                // Replace with actual logout logic
+            }
+        }
+
+        // Update buttons based on login status
+        updateAuthButtons();
+    </script>
 </body>
 
 </html>
